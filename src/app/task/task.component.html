@@ -1,0 +1,55 @@
+<div class="container">
+
+    <head>
+      <title>Detalhes da tarefa</title>
+    </head>
+  
+    <main class="main">
+      <h1>Tarefa</h1>
+      <article class="task">
+        <app-textarea
+              [ngModel] = "item.task"
+              [disabled]="true"
+            ></app-textarea>
+      </article>
+    </main>
+  
+    <section class="commentsContainer">
+      <h2>Deixar comentário</h2>
+      <form (submit)="handleComment($event)">
+        <app-textarea 
+          [ngModel]="input" 
+          (ngModelChange)="handleChangeInput($event)"
+          [placeholder]="'Digite seu comentário...'">
+        </app-textarea>
+        <button 
+          [disabled]="!session?.email" 
+          class="button">
+          Enviar comentário
+        </button>
+      </form>
+    </section>
+    
+    <section class="commentsContainer">
+      <h2>Todos os comentários</h2>
+      @if(comments.length === 0) {
+        <span>Nenhum comentário foi encontrado!</span>
+      }
+  
+      @for (item of comments; track item) {
+        <article class="comment">
+          <div class="headComment">
+            <label class="commentsLabel">
+              {{ item.name }}
+            </label>
+            @if (session?.email === item.user) {
+              <button class="buttonTrash" (click)="handleDeleteComment(item.id)">
+                <mat-icon style="color: #ff0000;" fontSet="material-icons-outlined">delete</mat-icon>
+              </button>
+            }
+          </div>
+          <p>{{ item.comment }}</p>
+        </article>
+      }
+    </section>
+  </div>  

@@ -1,0 +1,61 @@
+<div class="container">
+    <main class="main">
+      <section class="content">
+        <div class="contentForm">
+          <h1 class="title">Qual sua tarefa?</h1>
+          <form (submit)="handleRegisterTask($event)">
+            <app-textarea
+              [placeholder]="'Digite qual sua tarefa...'"
+              (ngModelChange)="handleChangeInput($event)"
+            ></app-textarea>
+            <div class="checkboxArea">
+              <input
+                type="checkbox"
+                id="checkbox"
+                class="checkbox"
+                [checked]="publicTask"
+                (change)="handleChangePublic($event)"
+              />
+              <label for="checkbox">Deixar tarefa pública?</label>
+            </div>
+            <button class="button" type="submit">Registrar</button>
+          </form>
+        </div>
+      </section>
+  
+      <section class="taskContainer">
+        <h1>Minhas tarefas</h1>
+  
+        @if (tasks.length === 0) {
+          <span>Você não possui tarefas cadastradas!</span>
+        }
+  
+        @for (task of tasks; track task.id) {
+          <article class="task" [attr.data-id]="task.id">
+            @if (task.public) {
+              <div class="tagContainer">
+                <label class="tag">PÚBLICO</label>
+                <button class="shareButton" (click)="handleShare(task.id)">
+                  <mat-icon style="color: #3183ff;" fontSet="material-icons-outlined">share</mat-icon>
+                </button>
+              </div>
+            }
+  
+            <div class="taskContent">
+              @if (task.public) {
+                <a [routerLink]="['/task', task.id]">
+                  <p>{{ task.task }}</p>
+                </a>
+              } @else {
+                <p>{{ task.task }}</p>
+              }
+              <button class="trashButton" (click)="handleDeleteTask(task.id)">
+                <mat-icon style="color: #ff0000;" fontSet="material-icons-outlined">delete</mat-icon>
+              </button>
+            </div>
+          </article>
+        }
+      </section>
+    </main>
+  </div>
+  

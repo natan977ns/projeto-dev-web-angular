@@ -1,0 +1,38 @@
+<header class="header">
+    <section class="content">
+      <nav class="nav">
+        <a routerLink="/">
+          <h1 class="logo">
+            Na<span>(</span>Tasks<span>)</span><span>+</span>
+          </h1>
+        </a>
+  
+        <!-- Verifica se o usuário está logado -->
+        @if(user) {
+          <a routerLink="/dashboard" class="link">
+            Meu painel
+          </a>
+        }
+      </nav>
+  
+      <!-- Verifica se o conteúdo está carregando -->
+      @if(loading) {
+        <div> Carregando... </div>
+      }
+    
+      <!-- Verifica se não está carregando e se o usuário está logado -->
+      @if(!loading && user) {
+        <button class="loginButton" (click)="logout()">
+          {{ user.email }}
+        </button>
+      } 
+      <!-- Caso contrário, exibe o botão de login -->
+      @else {
+        <div class="buttons">
+          <button class="registerButton" (click)="register()">Cadastrar</button>
+          <button class="loginButton" (click)="login()">Acessar</button>
+        </div>
+      }
+    </section>
+  </header>
+  
