@@ -98,7 +98,7 @@ export class TaskComponent implements OnInit{
             comment: this.input,
             createdAt: new Date(),
             name: this.session?.email,
-            photo: 'link_da_foto_perfil' // Adicione a URL da foto do usuário
+            photo: 'link_da_foto_perfil'
           }).then(() => {
             this.input = '';
             this.loadComments();

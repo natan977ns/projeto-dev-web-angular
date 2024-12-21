@@ -30,14 +30,13 @@ export class HeaderComponent implements OnInit {
       alert('Por favor, insira seu e-mail e senha.');
       return;
     }
-    
+
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailPattern.test(email)) {
       alert('Por favor, insira um e-mail válido.');
       return;
     }
 
-    // Validação da senha
     if (password.length < 6) {
       alert('A senha deve ter pelo menos 6 caracteres.');
       return;
